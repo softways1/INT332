@@ -1,0 +1,16 @@
+Docker environment variables are key-value pairs used to configure containers at runtime without hardcoding values into the image. 
+They allow you to change settings like database URLs, API keys, or log levels across development, staging, and production environments without rebuilding the image.
+
+What Are Docker Environment Variables?
+- Definition: Configuration values passed into a container at runtime.
+- Purpose: Control application behavior (e.g., database connection strings, feature flags, credentials).
+- Benefit: Makes containers portable and flexible across different environments.
+
+You can pass environment variables with -e:
+docker run -e MY_VAR=value -e DEBUG=true my-image
+
+
+
+
+
+
