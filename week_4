@@ -1,0 +1,28 @@
+Question.
+-run the container httpd so it is accessible on port 8080 of the host machine
+-create or update an HTML file inside the container to display the  message "AMAN IS LEARNING DOCKER"
+-verify the o\p using a cmd line
+-properly stop and remove the container after testing ????????
+
+solution -----------------
+
+PS C:\Users\AMAN KUMAR SINGH> docker run -d -p 8080:80 --name myhhtp httpd
+4eecf6b65ab09d3316b671a81754d45688852764131fe4c941f904fac465685a
+
+PS C:\Users\AMAN KUMAR SINGH> docker exec -it 4eecf6b65ab09d3316b671a81754d45688852764131fe4c941f904fac465685a /bin/bash
+
+root@4eecf6b65ab0:/usr/local/apache2# ls
+bin  build  cgi-bin  conf  error  htdocs  icons  include  logs  modules
+
+root@4eecf6b65ab0:/usr/local/apache2# cd htdocs
+root@4eecf6b65ab0:/usr/local/apache2/htdocs# ls
+index.html
+
+root@4eecf6b65ab0:/usr/local/apache2/htdocs# echo "hello Aman Kumar Singh:)" > index.html
+root@4eecf6b65ab0:/usr/local/apache2/htdocs# exit
+exit
+
+PS C:\Users\AMAN KUMAR SINGH> docker stop 4eecf6b65ab09d3316b671a81754d45688852764131fe4c941f904fac465685a
+4eecf6b65ab09d3316b671a81754d45688852764131fe4c941f904fac465685a
+PS C:\Users\AMAN KUMAR SINGH> docker rm 4eecf6b65ab09d3316b671a81754d45688852764131fe4c941f904fac465685a
+4eecf6b65ab09d3316b671a81754d45688852764131fe4c941f904fac465685a
