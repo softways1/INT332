@@ -22,6 +22,9 @@ root@4eecf6b65ab0:/usr/local/apache2/htdocs# echo "hello Aman Kumar Singh:)" > i
 root@4eecf6b65ab0:/usr/local/apache2/htdocs# exit
 exit
 
+
+,
+
 PS C:\Users\AMAN KUMAR SINGH> docker stop 4eecf6b65ab09d3316b671a81754d45688852764131fe4c941f904fac465685a
 4eecf6b65ab09d3316b671a81754d45688852764131fe4c941f904fac465685a
 PS C:\Users\AMAN KUMAR SINGH> docker rm 4eecf6b65ab09d3316b671a81754d45688852764131fe4c941f904fac465685a
