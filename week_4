@@ -9,3 +9,14 @@ Restart a container
 docker restart <container_id/name>
 Pause a container 
 docker pause <container_id/name>
+
+
+Copying a file from container to host
+step1 -> docker run -d --name task nginx
+step2 -> docker exec -it task /bin/bash
+step3 -> mkdir Project
+step4 -> cd Project
+step5 -> echo "I am Learning Docker" > newfile.txt
+step6 -> cat newfile.txt
+step7 -> docker attach task
+step8 -> docker cp task:/Project/newfile.txt "C:\Users\AMAN KUMAR SINGH\Desktop\notes.txt"
