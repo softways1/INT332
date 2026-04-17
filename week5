@@ -69,7 +69,7 @@ Enter:
 Username: GitHub username
 Password: Personal Access Token (PAT)
 
-⚠️ Do NOT use your GitHub password.
+Do NOT use your GitHub password.
 
 6. Push Image to GHCR
 docker push ghcr.io/yourusername/ghcr-demo
