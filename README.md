@@ -1,1 +1,1 @@
-Weekiwise Notest for Devops with Question and solutions.
+Weekwise Notes for Devops with Question and solutions.
