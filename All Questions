@@ -1,0 +1,264 @@
+1. )
+You are a DevOps trainee and need to deploy the Apache HTTP Server (httpd) using Docker for testing a static website. Pull the Apache server image from Docker Hub, create a container named apache-web, and run it in detached mode. Map port 8081 on the host machine to port 80 inside the container so that the website can be accessed through a browser.
+Tasks:
+Pull the Apache (httpd) Docker image.
+Verify that the image is successfully downloaded.
+Run the container with the specified name and port mapping.
+Check the list of running containers.
+Access the Apache web server using a browser.
+
+Answer:
+# Pull Apache image
+docker pull httpd
+
+# Verify image
+docker images
+
+# Run container
+docker run -d --name apache-web -p 8081:80 httpd
+
+# Check running containers
+docker ps
+
+2. )
+Run a Docker container named “DB-app" based on the “mongodb" image, and expose port 80 on the host to port 8082 on the container?
+
+docker run -d --name DB-app -p 80:8082 mongodb
+
+
+3. ) 
+
+You are a DevOps engineer in a startup company. The development team asks you to quickly deploy a simple web page that displays the message:
+
+Use the official httpd Docker image.
+Run the container so it is accessible on port 8080 of the host machine.
+Create or update an HTML file inside the container to display the required message.
+Verify the output using a command-line tool.
+Properly stop and remove the container after testing
+
+docker run -dit --name web-test -p 8080:80 httpd
+
+# Enter container
+docker exec -it web-test bash
+
+# Create HTML file
+echo "<h1>Welcome DevOps Engineer</h1>" > /usr/local/apache2/htdocs/index.html
+
+# Exit container
+exit
+
+# Verify using curl
+curl http://localhost:8080
+
+# Stop and remove container
+docker stop web-test
+docker rm web-test
+
+4) 
+
+3. How would you use the docker run command with -it, -e, -v, and --name to:
+•	Set an environment variable APP_ENV=production.	
+•	Bind a local directory /app/data to /data inside the container.	
+•	Name the container my_app.	
+
+docker run -it -e APP_ENV=production -v C:\app\data:/data --name my_app ubuntu
+
+5) 
+
+Inside this same running container, you are required to:
+Create a new directory named /project.
+Inside /project, create a file called report.txt.
+Add the following text inside the file:
+    This is our container interaction with our host machine.
+Verify the file content.
+Copy report.txt from the container to your Desktop.
+Create another file named notes.txt in the same /project directory.
+Append the text:
+Verify that both files exist inside /project.
+
+# Enter container
+docker exec -it my_app bash
+
+# Create directory
+mkdir /project
+
+# Create file
+echo "This is our container interaction with our host machine." > /project/report.txt
+
+# Verify content
+cat /project/report.txt
+
+# Exit
+exit
+
+# Copy file to Desktop
+docker cp my_app:/project/report.txt C:\Users\AMAN KUMAR SINGH\Desktop
+
+# Re-enter container
+docker exec -it my_app bash
+
+# Create another file
+echo "Notes file created" > /project/notes.txt
+
+# Verify both files
+ls /project
+
+exit
+
+
+6) 
+
+1. You need to start a new container using the nginx image while setting an environment variable ENV_MODE=production. Write the docker run command to achieve this.
+
+2. You have a running container named my_app, but it's not behaving as expected. You want to check its logs to debug any errors. Write the command to view its logs and follow new log entries in real-time.
+
+3. A container named web_server was stopped. Write the command to:a) Start the container again.b) Stop the container when needed.
+
+1: Run nginx with env variable
+docker run -d -e ENV_MODE=production nginx
+2: View logs in real-time
+docker logs -f my_app
+3: Start & Stop container
+# Start
+docker start web_server
+
+# Stop
+docker stop web_server
+
+7) 
+
+Create a Docker volume named projectdata.
+Verify that the volume has been created successfully.
+Inspect the volume and identify:The mount point (where Docker stores it on the host system).
+Run an Ubuntu container in detached mode:
+     Name the container project_container.
+Attach the volume     projectdata inside the container at /app/data.
+Inside the running container:Create a file named report.txt inside /app/data.
+Add the text: This is my first volume.
+Stop and remove the container.
+Run a new Ubuntu container:Name it project_container_new.
+Attach the same volume projectdata at /app/data.
+Verify that report.txt still exists and contains the same data.
+
+# Create volume
+docker volume create projectdata
+
+# Verify
+docker volume ls
+
+# Inspect volume
+docker volume inspect projectdata
+# Run container
+docker run -dit --name project_container -v projectdata:/app/data ubuntu
+# Inside container
+docker exec -it project_container bash
+
+echo "This is my first volume." > /app/data/report.txt
+
+exit
+# Stop & remove
+docker stop project_container
+docker rm project_container
+# Run new container
+docker run -dit --name project_container_new -v projectdata:/app/data ubuntu
+
+# Verify file
+docker exec -it project_container_new cat /app/data/report.txt
+
+
+
+8)
+
+You are a DevOps engineer at a university. The web development team has built a simple HTML-based portal and wants it deployed using Docker.
+Use the official httpd image.
+Name the container college_portal.
+Run it in detached mode.
+Expose container port 80 to host port 8080.
+Set environment variable ENV=production.
+Attach a Docker volume named portaldata to store website files.
+Modify the index.html file inside the container.
+Verify the output in the browser.
+Check logs if the page is not loading.
+Stop and remove the container.
+Remove the volume and image after testing.
+
+
+# Create volume
+docker volume create portaldata
+# Run container
+docker run -dit --name college_portal -p 8080:80 -e ENV=production -v portaldata:/usr/local/apache2/htdocs httpd
+# Modify HTML
+docker exec -it college_portal bash
+
+echo "<h1>College Portal</h1>" > /usr/local/apache2/htdocs/index.html
+
+exit
+
+# Logs
+docker logs college_portal
+# Stop & cleanup
+docker stop college_portal
+docker rm college_portal
+docker volume rm portaldata
+docker rmi httpd
+
+9)
+
+Your backend team reports that their MySQL container is failing to start.
+Use mysql:8 image.
+Set required environment variables:
+MYSQL_ROOT_PASSWORD
+MYSQL_DATABASE
+MYSQL_USER
+MYSQL_PASSWORD
+Run in background.
+Expose port 3306 to host port 3307.
+Check logs to identify errors.
+Enter inside container to verify database.
+Stop and remove container after debugging
+
+
+docker run -d --name mysql-test -p 3307:3306 `
+-e MYSQL_ROOT_PASSWORD=root123 `
+-e MYSQL_DATABASE=testdb `
+-e MYSQL_USER=aman `
+-e MYSQL_PASSWORD=aman123 `
+mysql:8
+# Check logs
+docker logs mysql-test
+# Enter container
+docker exec -it mysql-test bash
+# Open MySQL
+mysql -u root -p
+# Stop & remove
+docker stop mysql-test
+docker rm mysql-test
+
+10)
+IMAGE CREATION PROCESS MANUAL USING BUILD -T: Node and nginx
+
+Q10: Node image build
+
+Create a Dockerfile:
+
+FROM node:18
+WORKDIR /app
+COPY . .
+RUN npm install
+CMD ["node", "app.js"]
+Build Image:
+docker build -t node-app .
+Run:
+docker run -d -p 3000:3000 node-app
+
+Docker Image Build (Nginx)
+Nginx custom image
+
+Create Dockerfile:
+
+FROM nginx
+COPY index.html /usr/share/nginx/html/index.html
+Build Image:
+docker build -t nginx-custom .
+Run Container:
+docker run -d -p 8080:80 nginx-custom
